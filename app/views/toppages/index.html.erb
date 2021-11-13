@@ -1,13 +1,24 @@
 <div class="row justify-content-center">
   <div class="text-center border border-secondary col-6 p-2 p-sm-5 my-4 rounded">
+    
     <h2>するコトめも</h2>
-  <div class="text-secondary p-3">
-    <h5>家族がつながるアプリ</h5>
-    <p>家族のするコトを共有して、忙しい家族の時間をサポートします。</p>
-  </div>
-  <div>
-    <a href="#" button class="btn btn-secondary" type=button>login</a>
-  </div>
-    <%= link_to 'signup?', signup_path %>
+    
+    <div class="text-secondary p-3">
+      <h5>家族がつながるアプリ</h5>
+      <p>家族のするコトを共有して、忙しい家族の時間をサポートします。</p>
+    </div>
+
+    <% if logged_in? %>
+      <div> 
+        <a href=<%= users_path %> button class="btn btn-secondary" type=button>ログインユーザー： <%= current_user.name %></a>
+      </div>
+    <% else %>
+      <div>
+        <a href=<%= login_path %> button class="btn btn-secondary" type=button>login</a>
+      </div>
+    <% end %>
+    <div class='m-2'>
+      <%= link_to 'signup?', signup_path %>
+    </div>
   </div>
 </div>
