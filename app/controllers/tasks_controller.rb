@@ -6,19 +6,31 @@ class TasksController < ApplicationController
     @user = current_user
     @task = current_user.tasks.build(task_params)
     if @task.save
-      flash[:success] = 'メッセージを投稿しました'
+      flash[:success] = 'タスクの投稿に成功しました'
       redirect_to user_url(@user)
     else
       @pagy, @tasks = pagy(current_user.tasks.order(id: :desc))
-      flash.now[:danger] = 'メッセージの投稿に失敗しました。'
+      flash.now[:danger] = 'タスクの投稿に失敗しました。'
       render 'users/show'
     end
   end
 
   def edit
+    @user = current_user
+    @task = Task.find(params[:id])
   end
 
   def update
+    @user = current_user
+    @task = Task.find(params[:id])
+    
+    if @task.update(task_params)
+      flash[:success] = 'タスクは正常に更新されました'
+      redirect_to user_url(@user)
+    else
+      flash.now[:danger] = 'タスクは更新されませんでした'
+      render :edit
+    end
   end
 
   def destroy
