@@ -1,0 +1,33 @@
+<% if tasks.any? %>
+  <ul class="list-unstyled mt-2">
+    <% tasks.each do |task| %>
+      <li class="d-flex offset-1 mb-2">
+<!--投稿ユーザーアイコン-->
+        <img class="rounded me-2" src="<%= gravatar_url(task.user, { size: 40 }) %>" alt="">
+<!--投稿ユーザー名-->
+        <div class="col-2 mt-1">
+          <%= link_to task.user.name, user_path(task.user), class: "text-decoration-none" %>
+        </div>
+<!--ブックマークボタン-->
+        <buttom class="btn">
+          <i class="bi bi-bookmark-star"></i>
+        </buttom>
+<!--タスク本文-->
+        <div class="col-6 mt-1"><%= task.content %></div>
+<!--編集ボタン-->
+        <buttom class="btn">
+          <i class="bi bi-pencil-square"></i>
+        </buttom>
+<!--削除ボタン-->
+        <% if current_user == task.user %>
+          <%= link_to(task, method: :delete, data: { confirm: "You sure?" } , class: 'btn') do %>
+            <i class="bi bi-trash-fill"></i>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+  <div class="d-flex justify-content-center">
+    <%== pagy_bootstrap_nav(@pagy) %>
+  </div>
+<% end %>

@@ -9,10 +9,23 @@
   </aside>
   <div class="col-sm-8">
     <ul class="nav nav-tabs justify-content-end mb-3">
-      <li class="nav-item"><a href="#" class="nav-link">TODOリスト</a></li>
+      <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">TODOリスト<span class="badge bg-secondary"><%= @count_tasks %></span></a></li>
       <li class="nav-item"><a href="#" class="nav-link">★リスト</a></li>
       <li class="nav-item"><a href="#" class="nav-link">フォローリスト</a></li>
       <li class="nav-item"><a href="#" class="nav-link">フォロワーリスト</a></li>
     </ul>
   </div>
 </div>
+
+
+<%= form_with(model: @task) do |f| %>
+ <div class="form-group">
+    <label>新しく登録する</label>
+    <div class="col-sm-6">
+      <%= f.text_field :content, class: "form-control edit-form" %>
+    </div>
+       <%= f.submit '新規投稿', class: 'btn btn-primary' %>
+  </div>
+<% end %>
+
+<%= render 'tasks/tasks', tasks: @tasks %>

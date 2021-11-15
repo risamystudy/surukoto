@@ -7,6 +7,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @pagy, @tasks = pagy(@user.tasks.order(id: :desc))
+    counts(@user)
+    
+  #  if logged_in?
+      #@task = current_user.tasks.build
+      #@pagy, @tasks = pagy(current_user.tasks.order(id: :desc))
+   # end
   end
 
   def new

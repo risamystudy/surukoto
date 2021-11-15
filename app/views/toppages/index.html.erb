@@ -10,6 +10,7 @@
 
     <% if logged_in? %>
       <div> 
+<!--users_pathじゃなくて、user_pathにしたいけどid取得できない-->
         <a href=<%= users_path %> button class="btn btn-secondary" type=button>ログインユーザー： <%= current_user.name %></a>
       </div>
     <% else %>
