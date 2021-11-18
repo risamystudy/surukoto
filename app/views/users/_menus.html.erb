@@ -1,0 +1,19 @@
+  <div class="row">
+    <aside class="col-sm-3 mt-2">
+      <li class="mb-3 d-flex">
+        <img class="rounded-circle me-2" src="<%= gravatar_url(@user, { size: 32 }) %>" alt="">
+        <div>
+          <%= link_to @user.name, users_path %><% if current_user == @user %>（login）<% end %>
+        </div>
+       </li>
+    </aside>
+    <div class="col-sm-8">
+      <ul class="nav nav-tabs justify-content-end mb-3">
+        <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">TODOリスト <span class="badge rounded-pill bg-secondary"><%= @count_tasks %></span></a></li>
+        <li class="nav-item"><a href="#" class="nav-link">★リスト</a></li>
+        <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">フォローリスト <span class="badge rounded-pill bg-secondary"><%= @count_followings %></span></a></li>
+        <li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followers_user_path(@user)) %>">フォロワーリスト <span class="badge rounded-pill bg-secondary"><%= @count_followers %></span></a></li>
+      </ul>
+    </div>
+  </div>
+ 

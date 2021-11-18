@@ -1,32 +1,20 @@
 <!--メニュー-->
-  <div class="row">
-    <aside class="col-sm-3 mt-2">
-      <li class="mb-3 d-flex">
-        <img class="rounded-circle me-2" src="<%= gravatar_url(@user, { size: 32 }) %>" alt="">
-        <div>
-          <%= link_to @user.name, users_path %>（login）
+  <%= render 'users/menus', users: @users %>
+
+<!--自分のページなら新規投稿フォームを設置する-->
+  <% if current_user == @user %>
+    <%= form_with(model: @task) do |f| %>
+     <div class="form-group row justify-content-center">
+        <div class="col-sm-7">
+          <%= f.text_field :content, class: "form-control" %>
         </div>
-       </li>
-    </aside>
-    <div class="col-sm-8">
-      <ul class="nav nav-tabs justify-content-end mb-3">
-        <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">TODOリスト<span class="badge bg-secondary"><%= @count_tasks %></span></a></li>
-        <li class="nav-item"><a href="#" class="nav-link">★リスト</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">フォローリスト</a></li>
-        <li class="nav-item"><a href="#" class="nav-link">フォロワーリスト</a></li>
-      </ul>
-    </div>
-  </div>
+           <%= f.submit '新規投稿', class: 'btn btn-primary col-sm-2' %>
+      </div>
 
-
-<%= form_with(model: @task) do |f| %>
- <div class="form-group">
-    <label>新しく登録する</label>
-    <div class="col-sm-6">
-      <%= f.text_field :content, class: "form-control edit-form" %>
-    </div>
-       <%= f.submit '新規投稿', class: 'btn btn-primary' %>
-  </div>
-<% end %>
-
-<%= render 'tasks/tasks', tasks: @tasks %>
+    <% end %>
+  <% else %>
+  <% end %>
+  <div class="border-top my-3"></div>
+  
+<!--タスク一覧を表示-->
+    <%= render 'tasks/tasks', tasks: @tasks %>

@@ -6,12 +6,12 @@
         <img class="rounded me-2" src="<%= gravatar_url(task.user, { size: 40 }) %>" alt="">
 <!--投稿ユーザー名-->
         <div class="col-2 mt-1">
-          <%= link_to task.user.name, user_path(task.user), class: "text-decoration-none" %>
+          <%= task.user.name %>
         </div>
 <!--ブックマークボタン-->
-        <buttom class="btn">
-          <i class="bi bi-bookmark-star"></i>
-        </buttom>
+
+        <%= render 'bookmarks/bookmark_button', task: @task %>
+
 <!--タスク本文-->
         <div class="col-6 mt-1"><%= task.content %></div>
 <!--編集ボタン-->
@@ -27,6 +27,7 @@
             <i class="bi bi-trash-fill"></i>
           <% end %>
         <% end %>
+        
       </li>
     <% end %>
   </ul>

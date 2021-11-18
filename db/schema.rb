@@ -10,7 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_13_232054) do
+ActiveRecord::Schema.define(version: 2021_11_18_000507) do
+
+  create_table "bookmarks", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "task_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["task_id"], name: "index_bookmarks_on_task_id"
+    t.index ["user_id", "task_id"], name: "index_bookmarks_on_user_id_and_task_id", unique: true
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
+  create_table "relationships", charset: "utf8mb4", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "follow_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["follow_id"], name: "index_relationships_on_follow_id"
+    t.index ["user_id", "follow_id"], name: "index_relationships_on_user_id_and_follow_id", unique: true
+    t.index ["user_id"], name: "index_relationships_on_user_id"
+  end
 
   create_table "tasks", charset: "utf8mb4", force: :cascade do |t|
     t.string "content"
@@ -28,5 +48,9 @@ ActiveRecord::Schema.define(version: 2021_11_13_232054) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "bookmarks", "tasks"
+  add_foreign_key "bookmarks", "users"
+  add_foreign_key "relationships", "users"
+  add_foreign_key "relationships", "users", column: "follow_id"
   add_foreign_key "tasks", "users"
 end

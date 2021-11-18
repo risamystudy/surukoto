@@ -1,0 +1,19 @@
+<% unless current_user == user %>
+  <% if current_user.following?(user) %>
+    <%= form_with(model: current_user.relationships.find_by(follow_id: user.id), method: :delete) do |f| %>
+      <%= hidden_field_tag :follow_id, user.id %>
+<!--fontawesomeボタン-->      
+        <%= button_tag type: 'submit', class: 'btn' do %>
+            <i class="bi bi-suit-heart-fill" style="font-size: 20px; color: red"></i>
+        <% end %>
+    <% end %>
+  <% else %>
+    <%= form_with(model: current_user.relationships.build) do |f| %>
+      <%= hidden_field_tag :follow_id, user.id %>
+<!--fontawesomeボタン-->
+      <%= button_tag type: 'submit', class: 'btn' do %>
+        <i class="bi bi-suit-heart" style="font-size: 20px; color: gray"></i>
+      <% end %>
+    <% end %>
+  <% end %>
+<% end %>

@@ -1,0 +1,9 @@
+<!--メニュー-->
+  <%= render 'users/menus', users: @users %>
+
+<!--ユーザーリスト（フォロー）-->
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <%= render 'users', users: @followings %>
+    </div>
+  </div>
