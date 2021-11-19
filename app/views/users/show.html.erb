@@ -4,6 +4,7 @@
 <!--自分のページなら新規投稿フォームを設置する-->
   <% if current_user == @user %>
     <%= form_with(model: @task) do |f| %>
+      <%= render 'layouts/error_messages', model: f.object %>
      <div class="form-group row justify-content-center">
         <div class="col-sm-7">
           <%= f.text_field :content, class: "form-control" %>

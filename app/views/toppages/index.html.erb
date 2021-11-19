@@ -10,16 +10,20 @@
 
     <% if logged_in? %>
       <div> 
-<!--users_pathじゃなくて、user_pathにしたいけどid取得できない-->
-        <a href=<%= user_path(current_user) %> button class="btn btn-secondary" type=button>ログインユーザー： <%= current_user.name %></a>
+      <%= link_to(user_path(current_user), class: 'btn btn-secondary') do %>
+        ログインユーザー： <%= current_user.name %>
+      <% end %>
       </div>
     <% else %>
       <div>
-        <a href=<%= login_path %> button class="btn btn-secondary" type=button>login</a>
+        <%= link_to(login_path, class: 'btn btn-secondary') do %>
+        login
+        <% end %>
+      </div>
+      <div class='m-2'>
+        <%= link_to 'signup?', signup_path %>
       </div>
     <% end %>
-    <div class='m-2'>
-      <%= link_to 'signup?', signup_path %>
-    </div>
+
   </div>
 </div>
