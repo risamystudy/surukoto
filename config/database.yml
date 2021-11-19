@@ -50,6 +50,9 @@ test:
 #
 production:
   <<: *default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
   database: surukoto_production
   username: surukoto
   password: <%= ENV['SURUKOTO_DATABASE_PASSWORD'] %>
