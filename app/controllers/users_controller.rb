@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers]
+  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers, :bookmark_tasks]
   
   def index
     @pagy, @users = pagy(User.order(id: :desc), items: 5)
@@ -7,11 +7,11 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-#    if @user == current_user
-#   @pagy, @tasks = pagy(@user.feed_tasks.order(id: :desc))      
-# else
-   @pagy, @tasks = pagy(@user.tasks.order(id: :desc))
-# end
+    if @user == current_user
+      @pagy, @tasks = pagy(@user.feed_tasks.order(id: :desc))      
+    else
+      @pagy, @tasks = pagy(@user.tasks.order(id: :desc))
+    end
     counts(@user)
     
     if logged_in?
@@ -44,6 +44,13 @@ class UsersController < ApplicationController
   def followers
     @user = User.find(params[:id])
     @pagy, @followers = pagy(@user.followers)
+    counts(@user)
+  end
+  
+  def bookmark_tasks
+    @user = User.find(params[:id])
+    @task = Task.find(params[:id])
+    @pagy, @bookmark_tasks = pagy(@user.bookmark_tasks)
     counts(@user)
   end
   

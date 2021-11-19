@@ -10,6 +10,12 @@
         <div class="ms-2 mt-2">
           <%= link_to user.name, user_path(user) %>
         </div>
+        
+        <!--ログインユーザーのとき-->
+        <% if user == current_user %>
+        <div class="ms-2 mt-2">(ログインユーザー)</div>
+        <% end %>
+
 
         <!--フォローボタン-->
         <div>

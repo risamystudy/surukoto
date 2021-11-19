@@ -41,10 +41,10 @@ class User < ApplicationRecord
   
 #ブックマーク関連 
   def bookmark(task)
-    self.bookmarks.find_or_create_by(task_id: task_id)
+    self.bookmarks.find_or_create_by(task_id: task.id)
   end
   def unbookmark(task)
-    bookmark = self.bookmarks.find_by(task_id: task_id)
+    bookmark = self.bookmarks.find_by(task_id: task.id)
     bookmark.destroy if bookmark
   end
   def bookmark_task?(task)

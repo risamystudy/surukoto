@@ -9,9 +9,7 @@
           <%= task.user.name %>
         </div>
 <!--ブックマークボタン-->
-
-        <%= render 'bookmarks/bookmark_button', task: @task %>
-
+        <%= render 'bookmarks/bookmark_button', task: task %>
 <!--タスク本文-->
         <div class="col-6 mt-1"><%= task.content %></div>
 <!--編集ボタン-->
