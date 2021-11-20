@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :tasks, only: [:create, :edit, :update, :destroy]
+  resources :tasks, only: [:index, :create, :edit, :update, :destroy]
   resources :relationships, only: [:create, :destroy]
   resources :bookmarks, only: [:create, :destroy]
 end

@@ -2,6 +2,11 @@ class TasksController < ApplicationController
   before_action :require_user_logged_in
   before_action :correct_user, only: [:destroy]
   
+  def index
+    redirect_to user_path(current_user)
+  end
+  
+  
   def create
     @user = current_user
     @task = current_user.tasks.build(task_params)
@@ -9,10 +14,11 @@ class TasksController < ApplicationController
       flash[:success] = 'タスクの投稿に成功しました'
       redirect_to user_url(@user)
     else
-      @pagy, @tasks = pagy(current_user.tasks.order(id: :desc))
+      @pagy, @tasks = pagy(@user.feed_tasks.order(id: :desc))
       flash.now[:danger] = 'タスクの投稿に失敗しました。'
       render 'users/show'
     end
+    
   end
 
   def edit
