@@ -9,6 +9,11 @@
     </aside>
     <div class="col-sm-8">
       <ul class="nav nav-tabs justify-content-end mb-3">
+        <li class="nav-item">
+          <%= link_to(users_path, class: 'btn me-3 mt-1') do %>
+            <i class="bi bi-person-fill"></i>ユーザー一覧
+          <% end %>
+        </li>
         <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">TODOリスト <span class="badge rounded-pill bg-secondary"><%= @count_tasks %></span></a></li>
         <li class="nav-item"><a href="<%= bookmark_tasks_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(bookmark_tasks_user_path(@user)) %>">★リスト <span class="badge rounded-pill bg-secondary"><%= @count_bookmark_tasks %></span></a></li>
         <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">フォローリスト <span class="badge rounded-pill bg-secondary"><%= @count_followings %></span></a></li>

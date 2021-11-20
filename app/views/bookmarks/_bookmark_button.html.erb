@@ -1,21 +1,17 @@
 <% if current_user.bookmark_task?(task) %>
-
   <%= form_with(model: current_user.bookmarks.find_by(task_id: task.id), method: :delete) do |f| %>
-    <%= hidden_field_tag :task_id, task.id %>
+    <%= hidden_field_tag :task_id, task.id, id: "task_#{task.id}" %>
 <!--fontawesomeボタン-->      
       <%= button_tag type: 'submit', class: 'btn' do %>
         <i class="bi bi-bookmark-star-fill" style=""></i>
       <% end %>
   <% end %>
-  
 <% else %>
-
   <%= form_with(model: current_user.bookmarks.build) do |f| %>
-    <%= hidden_field_tag :task_id, task.id %>
+    <%= hidden_field_tag :task_id, task.id, id: "task_#{task.id}" %>
 <!--fontawesomeボタン-->
       <%= button_tag type: 'submit', class: 'btn' do %>
         <i class="bi bi-bookmark-star" style=""></i>
       <% end %>
-    
   <% end %>
 <% end %>

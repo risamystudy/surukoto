@@ -7,23 +7,13 @@
       <h5>家族がつながるアプリ</h5>
       <p>家族のするコトを共有して、忙しい家族の時間をサポートします。</p>
     </div>
-
-    <% if logged_in? %>
-      <div> 
-      <%= link_to(user_path(current_user), class: 'btn btn-secondary') do %>
-        ログインユーザー： <%= current_user.name %>
-      <% end %>
-      </div>
-    <% else %>
-      <div>
-        <%= link_to(login_path, class: 'btn btn-secondary') do %>
+    <div>
+      <%= link_to(login_path, class: 'btn btn-secondary') do %>
         login
-        <% end %>
-      </div>
-      <div class='m-2'>
-        <%= link_to 'signup?', signup_path %>
-      </div>
-    <% end %>
-
+      <% end %>
+    </div>
+    <div class='m-2'>
+      <%= link_to 'signup?', signup_path %>
+    </div>
   </div>
 </div>
